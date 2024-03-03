@@ -80,3 +80,14 @@ let gameSituation = gameLogic(x)
 
 console.log(gameSituation.currentPlayer.playerSymbol)
 
+
+gameBox1 = document.querySelector(".gameBox1")
+gameBox2 = document.querySelector(".gameBox2")
+gameBox3 = document.querySelector(".gameBox3")
+gameBox4 = document.querySelector(".gameBox4")
+gameBox5 = document.querySelector(".gameBox5")
+gameBox6 = document.querySelector(".gameBox6")
+gameBox7 = document.querySelector(".gameBox7")
+gameBox8 = document.querySelector(".gameBox8")
+gameBox9 = document.querySelector(".gameBox9")
+
