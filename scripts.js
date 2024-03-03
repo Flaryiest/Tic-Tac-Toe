@@ -49,19 +49,25 @@ function gameLogic (player) {
     return {currentPlayer}
     
 }
+let gameSituation = gameLogic(x)
 
+console.log(gameSituation.currentPlayer.playerSymbol)
 
+gameDisplay = document.querySelector(".gameDisplay")
 
-const moveInputForm = document.getElementById("moveInputForm")
-moveInputForm.onsubmit = function(event) {
-    event.preventDefault()
-    let currentMoveRow = document.getElementById('moveInputRow').value
-    let currentMoveColumn = document.getElementById("moveInputColumn").value
-    document.getElementById("moveInputRow").value = ""
-    document.getElementById("moveInputColumn").value = ""
+gameDisplay.addEventListener("click", function(event) {
+    
+    console.log(event.target.getAttribute("data-row"))
+    let clickedBox = document.getElementsByClassName(event.target.getAttribute("class"))[0]
+    console.log(clickedBox)
+    clickedBox.textContent = gameSituation.currentPlayer.playerSymbol
+    console.log(clickedBox.textContent)
+    let currentMoveRow = event.target.getAttribute("data-row")
+    let currentMoveColumn = event.target.getAttribute("data-column")
+    
     console.log(currentMoveRow, currentMoveColumn)
-    if (currentBoard.currentGameBoard[currentMoveColumn - 1][currentMoveRow - 1] == 0) {
-        currentBoard.currentGameBoard[currentMoveColumn - 1][currentMoveRow - 1] = gameSituation.currentPlayer.playerSymbol
+    if (currentBoard.currentGameBoard[currentMoveColumn][currentMoveRow] == 0) {
+        currentBoard.currentGameBoard[currentMoveColumn][currentMoveRow] = gameSituation.currentPlayer.playerSymbol
         console.log(currentBoard.currentGameBoard)
         if (currentBoard.checkWin(currentBoard.currentGameBoard)) {
             console.log(gameSituation.currentPlayer.playerSymbol + " won")
@@ -73,21 +79,6 @@ moveInputForm.onsubmit = function(event) {
             gameSituation.currentPlayer = x
         }
     }
-}
+})
 
-
-let gameSituation = gameLogic(x)
-
-console.log(gameSituation.currentPlayer.playerSymbol)
-
-
-gameBox1 = document.querySelector(".gameBox1")
-gameBox2 = document.querySelector(".gameBox2")
-gameBox3 = document.querySelector(".gameBox3")
-gameBox4 = document.querySelector(".gameBox4")
-gameBox5 = document.querySelector(".gameBox5")
-gameBox6 = document.querySelector(".gameBox6")
-gameBox7 = document.querySelector(".gameBox7")
-gameBox8 = document.querySelector(".gameBox8")
-gameBox9 = document.querySelector(".gameBox9")
 
