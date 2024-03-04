@@ -1,3 +1,4 @@
+let gameResults = document.querySelector(".gameResults")
 function gameBoard (currentGameBoard) {
     if (currentGameBoard == null) 
     {currentGameBoard = [[0,0,0],[0,0,0],[0,0,0]]}
@@ -8,26 +9,22 @@ function gameBoard (currentGameBoard) {
             console.log(line)
             if (board[line][0] == board[line][1] && board[line][1] == board[line][2]) {
                 if (board[line][0] == "X" || board[line][0] == "O") {
-                console.log(board[line][0], board[line][1],board[line][2], line)
                 return true
             }
             }
             else if (board[0][line] == board[1][line] && board[1][line] == board[1][line]) {
                 if (board[0][line] == "X" || board[0][line] == "O") {
-                console.log(board[line][0], board[line][1],board[line][2], line)
                 return true
                 
                 }
             }
             else if (board[0][0] == board[1][1] && board[1][1] == board[2][2]) {
                 if (board[0][0] == "X" || board[0][0] == "O") {
-                    console.log("pog")
                     return true
                 }
             }
             else if (board[0][2] == board[1][1] && board[1][1] == board[0][2]) {
                 if (board[0][2] == "X" || board[0][2] == "O") {
-                        console.log("pog")
                         return true
                 }
             }
@@ -66,11 +63,12 @@ gameDisplay.addEventListener("click", function(event) {
     let currentMoveColumn = event.target.getAttribute("data-column")
     
     console.log(currentMoveRow, currentMoveColumn)
-    if (currentBoard.currentGameBoard[currentMoveColumn][currentMoveRow] == 0) {
-        currentBoard.currentGameBoard[currentMoveColumn][currentMoveRow] = gameSituation.currentPlayer.playerSymbol
+    if (currentBoard.currentGameBoard[currentMoveRow][currentMoveColumn] == 0) {
+        currentBoard.currentGameBoard[currentMoveRow][currentMoveColumn] = gameSituation.currentPlayer.playerSymbol
         console.log(currentBoard.currentGameBoard)
         if (currentBoard.checkWin(currentBoard.currentGameBoard)) {
-            console.log(gameSituation.currentPlayer.playerSymbol + " won")
+            gameResults.textContent = gameSituation.currentPlayer.playerSymbol + " won"
+            currentBoard.currentGameBoard = [[0,0,0],[0,0,0],[0,0,0]]
         }
         if (gameSituation.currentPlayer == x) {
             gameSituation.currentPlayer = o
