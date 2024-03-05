@@ -12,7 +12,7 @@ function gameBoard (currentGameBoard) {
                 return true
             }
             }
-            else if (board[0][line] == board[1][line] && board[1][line] == board[1][line]) {
+            else if (board[0][line] == board[1][line] && board[1][line] == board[2][line]) {
                 if (board[0][line] == "X" || board[0][line] == "O") {
                 return true
                 
