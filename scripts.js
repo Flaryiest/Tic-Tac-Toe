@@ -1,3 +1,6 @@
+gameBoxes = document.querySelectorAll(".card")
+let playerOneCurrentScore = 0
+let playerTwoCurrentScore = 0
 let gameResults = document.querySelector(".gameResults")
 function gameBoard (currentGameBoard) {
     if (currentGameBoard == null) 
@@ -23,7 +26,7 @@ function gameBoard (currentGameBoard) {
                     return true
                 }
             }
-            else if (board[0][2] == board[1][1] && board[1][1] == board[0][2]) {
+            else if (board[0][2] == board[1][1] && board[1][1] == board[2][0]) {
                 if (board[0][2] == "X" || board[0][2] == "O") {
                         return true
                 }
@@ -38,8 +41,8 @@ let currentBoard = gameBoard();
 function player (playerName, playerSymbol) {
     return {playerName, playerSymbol}
 }
-let x = player(null, "X")
-let o = player(null, "O")
+let x = player("X", "X")
+let o = player("O", "O")
 
 function gameLogic (player) {
     currentPlayer = player
@@ -67,8 +70,19 @@ gameDisplay.addEventListener("click", function(event) {
         currentBoard.currentGameBoard[currentMoveRow][currentMoveColumn] = gameSituation.currentPlayer.playerSymbol
         console.log(currentBoard.currentGameBoard)
         if (currentBoard.checkWin(currentBoard.currentGameBoard)) {
-            gameResults.textContent = gameSituation.currentPlayer.playerSymbol + " won"
+            gameResults.textContent += gameSituation.currentPlayer.playerName + " won " 
+            if (gameSituation.currentPlayer == x) {
+                playerOneCurrentScore += 1
+                playerOneScoreDisplay.textContent = playerOneCurrentScore
+            }
+            else {
+                playerTwoCurrentScore += 1
+                playerTwoScoreDisplay.textContent = playerTwoCurrentScore
+            }
             currentBoard.currentGameBoard = [[0,0,0],[0,0,0],[0,0,0]]
+            for (box in gameBoxes) {
+                gameBoxes[box].textContent = ""
+            }
         }
         if (gameSituation.currentPlayer == x) {
             gameSituation.currentPlayer = o
@@ -79,4 +93,37 @@ gameDisplay.addEventListener("click", function(event) {
     }
 })
 
+userInput = document.querySelector(".userInput")
+console.log(userInput)
+userInput.onsubmit = function(event) {
+    event.preventDefault()
+    let playerOneName = document.getElementById("playerOneName").value
+    let playerTwoName = document.getElementById("playerTwoName").value
+    x.playerName = playerOneName
+    o.playerName = playerTwoName
+}
 
+restart = document.querySelector(".restart")
+restart.addEventListener("click", function() {
+    currentBoard.currentGameBoard = [[0,0,0],[0,0,0],[0,0,0]]
+    for (box in gameBoxes) {
+        gameBoxes[box].textContent = ""
+    }
+})
+
+newGame = document.querySelector(".newGame")
+newGame.addEventListener("click", function() {
+    currentBoard.currentGameBoard = [[0,0,0],[0,0,0],[0,0,0]]
+    for (box in gameBoxes) {
+        gameBoxes[box].textContent = ""
+    }
+    playerOneCurrentScore = 0
+    playerTwoCurrentScore = 0
+    playerOneScoreDisplay.textContent = playerOneCurrentScore
+    playerTwoScoreDisplay.textContent = playerTwoCurrentScore
+})
+playerOneScoreDisplay = document.querySelector(".playerOneScoreDisplay")
+playerTwoScoreDisplay = document.querySelector(".playerTwoScoreDisplay")
+
+playerOneScoreDisplay.textContent = playerOneCurrentScore
+playerTwoScoreDisplay.textContent = playerTwoCurrentScore
